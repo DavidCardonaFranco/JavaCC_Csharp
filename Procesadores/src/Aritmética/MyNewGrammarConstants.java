@@ -11,37 +11,39 @@ public interface MyNewGrammarConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 5;
+  int INTEGER_LITERAL = 6;
   /** RegularExpression Id. */
-  int DECIMAL_INTEGER_LITERAL = 6;
+  int DECIMAL_INTEGER_LITERAL = 7;
   /** RegularExpression Id. */
-  int DECIMAL_DIGIT = 7;
+  int DECIMAL_DIGIT = 8;
   /** RegularExpression Id. */
-  int ASSIGN = 8;
+  int ASSIGN = 9;
   /** RegularExpression Id. */
-  int MINUS = 9;
+  int MINUS = 10;
   /** RegularExpression Id. */
-  int PLUS = 10;
+  int PLUS = 11;
   /** RegularExpression Id. */
-  int STAR = 11;
+  int STAR = 12;
   /** RegularExpression Id. */
-  int SLASH = 12;
+  int SLASH = 13;
   /** RegularExpression Id. */
-  int COMMA = 13;
+  int COMMA = 14;
   /** RegularExpression Id. */
-  int SEPARATOR = 14;
+  int LPAREN = 15;
   /** RegularExpression Id. */
-  int IDENTIFIER = 15;
+  int RPAREN = 16;
   /** RegularExpression Id. */
-  int ESCAPED_IDENTIFIER = 16;
+  int IDENTIFIER = 17;
   /** RegularExpression Id. */
-  int IDENTIFIER_NAME = 17;
+  int ESCAPED_IDENTIFIER = 18;
   /** RegularExpression Id. */
-  int IDENTIFIER_START = 18;
+  int IDENTIFIER_NAME = 19;
   /** RegularExpression Id. */
-  int IDENTIFIER_PART = 19;
+  int IDENTIFIER_START = 20;
   /** RegularExpression Id. */
-  int UNICODE_LETTER = 20;
+  int IDENTIFIER_PART = 21;
+  /** RegularExpression Id. */
+  int UNICODE_LETTER = 22;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -49,6 +51,7 @@ public interface MyNewGrammarConstants {
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
+    "\" \"",
     "\"\\n\"",
     "\"\\t\"",
     "\"\\r\"",
@@ -62,7 +65,8 @@ public interface MyNewGrammarConstants {
     "\"*\"",
     "\"/\"",
     "\",\"",
-    "<SEPARATOR>",
+    "\"(\"",
+    "\")\"",
     "<IDENTIFIER>",
     "<ESCAPED_IDENTIFIER>",
     "<IDENTIFIER_NAME>",

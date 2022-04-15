@@ -43,14 +43,14 @@ public class MyNewGrammar implements MyNewGrammarConstants {
     case INTEGER_LITERAL:
     case MINUS:
     case PLUS:
-    case SEPARATOR:
+    case LPAREN:
     case IDENTIFIER:
-      AdditiveExpression();
-      jj_consume_token(21);
+      additive_expression();
+      jj_consume_token(23);
     {if (true) return 0;}
       break;
-    case 21:
-      jj_consume_token(21);
+    case 23:
+      jj_consume_token(23);
     {if (true) return 1;}
       break;
     default:
@@ -61,8 +61,8 @@ public class MyNewGrammar implements MyNewGrammarConstants {
     throw new Error("Missing return statement in function");
   }
 
-  static final public void AdditiveExpression() throws ParseException {
-    MultiplicativeExpression();
+  static final public void additive_expression() throws ParseException {
+    multiplicative_expression();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -86,18 +86,18 @@ public class MyNewGrammar implements MyNewGrammarConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      MultiplicativeExpression();
+      multiplicative_expression();
     }
   }
 
-  static final public void MultiplicativeExpression() throws ParseException {
-    UnaryExpression();
+  static final public void multiplicative_expression() throws ParseException {
+    unary_expression();
     label_2:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case STAR:
       case SLASH:
-      case 22:
+      case 24:
         ;
         break;
       default:
@@ -111,22 +111,22 @@ public class MyNewGrammar implements MyNewGrammarConstants {
       case SLASH:
         jj_consume_token(SLASH);
         break;
-      case 22:
-        jj_consume_token(22);
+      case 24:
+        jj_consume_token(24);
         break;
       default:
         jj_la1[4] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
-      UnaryExpression();
+      unary_expression();
     }
   }
 
-  static final public void UnaryExpression() throws ParseException {
+  static final public void unary_expression() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INTEGER_LITERAL:
-    case SEPARATOR:
+    case LPAREN:
     case IDENTIFIER:
       primary_expression();
       break;
@@ -144,7 +144,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      UnaryExpression();
+      unary_expression();
       break;
     default:
       jj_la1[6] = jj_gen;
@@ -162,8 +162,8 @@ public class MyNewGrammar implements MyNewGrammarConstants {
     case INTEGER_LITERAL:
       jj_consume_token(INTEGER_LITERAL);
       break;
-    case SEPARATOR:
-      jj_consume_token(SEPARATOR);
+    case LPAREN:
+      parenthesized_expression();
       break;
     case IDENTIFIER:
       jj_consume_token(IDENTIFIER);
@@ -173,6 +173,12 @@ public class MyNewGrammar implements MyNewGrammarConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
+  }
+
+  static final public void parenthesized_expression() throws ParseException {
+    jj_consume_token(LPAREN);
+    additive_expression();
+    jj_consume_token(RPAREN);
   }
 
   static private boolean jj_initialized_once = false;
@@ -191,7 +197,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x20c620,0x600,0x600,0x401800,0x401800,0x600,0xc620,0xc020,};
+      jj_la1_0 = new int[] {0x828c40,0xc00,0xc00,0x1003000,0x1003000,0xc00,0x28c40,0x28040,};
    }
 
   /** Constructor with InputStream. */
@@ -329,7 +335,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[23];
+    boolean[] la1tokens = new boolean[25];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -343,7 +349,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
         }
       }
     }
-    for (int i = 0; i < 23; i++) {
+    for (int i = 0; i < 25; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

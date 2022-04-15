@@ -48,7 +48,8 @@ PARSER_END(MyNewGrammar)
 
 /** Léxico */
 SKIP : {
-  "\n"
+  " "
+| "\n"
 | "\t"
 | "\r"
 | "\f"
@@ -76,7 +77,8 @@ TOKEN :
 
 TOKEN :
 {
-< SEPARATOR : "(" | ")">
+   < LPAREN : "(" >
+|  < RPAREN : ")" >
 }
 
 /* Identificadores */
@@ -362,7 +364,7 @@ TOKEN:
 int one_line() :
 {}
 {
-  AdditiveExpression() ";"
+  additive_expression() ";"
   {
     return 0;
   }
@@ -372,26 +374,26 @@ int one_line() :
   }
 }
 
-void AdditiveExpression():
+void additive_expression():
 {}
 {
-  MultiplicativeExpression() ( ( "+" | "-" ) MultiplicativeExpression() )*
+  multiplicative_expression() ( ( "+" | "-" ) multiplicative_expression() )*
 }
 
 
-void MultiplicativeExpression():
+void multiplicative_expression():
 {}
 {
-  UnaryExpression() ( ( "*" | "/" | "%" ) UnaryExpression() )*
+  unary_expression() ( ( "*" | "/" | "%" ) unary_expression() )*
 }
 
 
-void UnaryExpression():
+void unary_expression():
 {}
 {
   primary_expression()
 |  
-   ( "+" | "-" ) UnaryExpression()
+   ( "+" | "-" ) unary_expression()
 
 }
 
@@ -406,7 +408,13 @@ void primary_no_array_creation_expression():
 {
   < INTEGER_LITERAL >
 |
-  < SEPARATOR >
+  parenthesized_expression()
 |
   < IDENTIFIER >
+}
+
+void  parenthesized_expression():
+{}
+{
+  "(" additive_expression() ")"
 }
